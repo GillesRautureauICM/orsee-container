@@ -30,7 +30,7 @@ Used only during database initialisation:
 
     MYSQL_ROOT_PASSWORD=
 
-Add any additional files you need to include in your image to `web/` - for example, style files to web/var/www/html/orsee/style/mystyle
+Add any additional files you need to include in your image to `web/` - for example, style files to `web/var/www/html/orsee/style/mystyle`
 
 If you include config files in the image, they will override environment variables.  
 - `web/etc/ssmtp/ssmtp.conf`  
