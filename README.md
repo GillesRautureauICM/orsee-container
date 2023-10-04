@@ -1,8 +1,6 @@
-# ORSEE - https://orsee.org
+# Container implementation for ORSEE - https://orsee.org
 
-## Container implementation for ORSEE
-
-### Quickstart
+## Quickstart
 
     git clone
     cd 
@@ -12,8 +10,8 @@
 
 Wait a few seconds then navigate to http://localhost:8080/orsee/public/
 
-### Environment variables
-You can configure your ORSEE either using environment variables via .env, or by inserting config files into the image build process.
+## Environment variables
+You can configure your ORSEE either using environment variables via `.env`, or by inserting config files into the image build process.
 
 Supported variables and their defaults:
 
@@ -26,13 +24,13 @@ Supported variables and their defaults:
     MYSQL_HOST=localhost
     MYSQL_TABLE_PREFIX=or_
     TIMEZONE=Australia/Sydney
-    SMTP_SERVER_AND_PORT=127.0.0.1:25
+    SMTP_SERVER_AND_PORT=host.docker.internal:25
 
 Used only during database initialisation:  
 
     MYSQL_ROOT_PASSWORD=
 
-Add any additional files you need to include in your image to web/ - for example, style files to web/var/www/html/orsee/style/mystyle
+Add any additional files you need to include in your image to `web/` - for example, style files to web/var/www/html/orsee/style/mystyle
 
 If you include config files in the image, they will override environment variables.  
 - `web/etc/ssmtp/ssmtp.conf`  
@@ -40,7 +38,7 @@ If you include config files in the image, they will override environment variabl
 - `web/var/www/html/orsee/config/settings.php`  
     Example file is in the ORSEE distibution as settings-dist.php  
 
-### Cron
+## Cron
 Live environments will need a working cron. Add something like this to your system cron to exec in the running container:  
 
     */5 * * * *  docker exec orsee_web_1 bash -c "cd /var/www/html/orsee/admin && /usr/local/bin/php /var/www/html/orsee/admin/cron.php"
