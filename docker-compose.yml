@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  web:
+    image: orsee:3.2.0
+    build:
+      context: ./web
+      args:
+        ROOT_DIRECTORY: ${ROOT_DIRECTORY:-/orsee}
+    ports:
+      - 8080:80
+    env_file:
+      - .env
+  db:
+    image: mariadb:10.11
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
+  mailhog:
+    image: mailhog
+    ports:
+      - 8025:8025
+    profiles:
+      - test
+volumes:
+  db:
