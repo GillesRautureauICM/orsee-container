@@ -20,7 +20,9 @@ RUN curl -sL https://github.com/orsee/orsee/archive/refs/tags/orsee_3.2.0.tar.gz
  && tar -xvzf /tmp/orsee.tar.gz -C /tmp \
  && rm -f /tmp/orsee.tar.gz \
  && mv /tmp/orsee-orsee_3.2.0 /var/www/html$ROOT_DIRECTORY
-RUN rm /etc/ssmtp/ssmtp.conf
+RUN rm /etc/ssmtp/ssmtp.conf \
+    && ln -s /var/local/ssmtp.conf /etc/ssmtp/ssmtp.conf \
+    && ln -s /var/local/settings.php /var/www/html$ROOT_DIRECTORY/config/settings.php
 COPY ./ /
 RUN chmod +x /usr/local/bin/startup.sh
 CMD /usr/local/bin/startup.sh && apache2-foreground

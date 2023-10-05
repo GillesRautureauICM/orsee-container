@@ -1,5 +1,6 @@
-SETTINGS_TEMPLATE=/var/www/html/$ROOT_DIRECTORY/install/settings-dist.php
-SETTINGS_DESTINATION=/var/www/html/$ROOT_DIRECTORY/config/settings.php
+SETTINGS_TEMPLATE=/var/www/html$ROOT_DIRECTORY/install/settings-dist.php
+SETTINGS_DESTINATION=/var/local/settings.php
+SETTINGS_ORIGINAL_LOCATION=/var/www/html$ROOT_DIRECTORY/config/settings.php
 MAIL_SETTINGS=/etc/ssmtp/ssmtp.conf
 
 if [ -f "$MAIL_SETTINGS" ]; then
@@ -15,14 +16,14 @@ else
     fi
 fi
 
-if [ -f "$SETTINGS_DESTINATION" ]; then
+if [ -f "$SETTINGS_ORIGINAL_LOCATION" ]; then
     #We already have a settings file
-    echo "Found custom $SETTINGS_DESTINATION"
+    echo "Found custom $SETTINGS_ORIGINAL_LOCATION"
     exit 0
 fi
 
 #Copy from template
-cp $SETTINGS_TEMPLATE $SETTINGS_DESTINATION
+cat $SETTINGS_TEMPLATE > $SETTINGS_DESTINATION
 
 #Always set these
 sed -i "s/^\$settings__root_to_server=\".*/\$settings__root_to_server=\"\/var\/www\/html\";/" $SETTINGS_DESTINATION

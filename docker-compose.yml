@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.6"
 
 services:
   web:
@@ -11,6 +11,11 @@ services:
       - 8080:80
     env_file:
       - .env
+    read_only: true
+    tmpfs:
+      - /run
+      - /var/cache
+      - /var/local
   db:
     image: mariadb:10.11
     volumes:
