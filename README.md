@@ -41,7 +41,9 @@ If you include config files in the image, they will override environment variabl
 - `web/var/www/html/orsee/config/settings.php`  
     Example file is in the ORSEE distibution as settings-dist.php  
 
-## Cron
-Live environments will need a working cron. Add something like this to your system cron to exec in the running container:  
+## Live environments
 
-    */5 * * * *  docker exec orsee-container_web_1 bash -c "cd /var/www/html/orsee/admin && /usr/local/bin/php /var/www/html/orsee/admin/cron.php"
+This should provide a relatively cromulent ORSEE distribution. If you plan on running this in production, I leave it to you on how to deal with:
+- Database backups (Hint: `docker exec orsee-3.2.0-db bash -c 'mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE' > orseedump.sql`)
+- Apache/PHP version updates (Hint: regularly rebuild your container image and redeploy)
+- Cron (Hint: `docker exec orsee-container_web_1 bash -c "cd /var/www/html/orsee/admin && /usr/local/bin/php /var/www/html/orsee/admin/cron.php"`
