@@ -9,6 +9,7 @@ RUN apt-get update \
        mailutils \
        libmcrypt-dev \
        libfreetype6-dev \
+       cron \
     && apt-get -y autoremove \
     && apt-get clean autoclean \
     && rm -fr /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
@@ -24,5 +25,8 @@ RUN rm /etc/ssmtp/ssmtp.conf \
     && ln -s /var/local/ssmtp.conf /etc/ssmtp/ssmtp.conf \
     && ln -s /var/local/settings.php /var/www/html$ROOT_DIRECTORY/config/settings.php
 COPY ./ /
+
+RUN /usr/bin/crontab /cronjobs
+RUN chmod +x /runjobs.sh
 RUN chmod +x /usr/local/bin/startup.sh
 CMD /usr/local/bin/startup.sh && apache2-foreground

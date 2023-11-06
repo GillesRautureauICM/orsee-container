@@ -74,3 +74,9 @@ if [ -n "$TIMEZONE" ]; then
     echo "Got TIMEZONE=$TIMEZONE"
     sed -i "s#^date_default_timezone_set.*#date_default_timezone_set\('$TIMEZONE'\);#" $SETTINGS_DESTINATION
 fi
+
+#Start cron service
+if service --status-all | grep -q "cron";then
+    /usr/sbin/service cron start
+fi
+

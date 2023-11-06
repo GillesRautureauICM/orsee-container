@@ -8,7 +8,7 @@ services:
       args:
         ROOT_DIRECTORY: ${ROOT_DIRECTORY:-/orsee}
     ports:
-      - 8080:80
+      - 8088:80
     env_file:
       - .env
     read_only: true
@@ -16,6 +16,7 @@ services:
       - /run
       - /var/cache
       - /var/local
+      - /tmp
   db:
     image: mariadb:10.11
     volumes:
@@ -24,10 +25,14 @@ services:
     env_file:
       - .env
   mailhog:
-    image: mailhog
+    image: mailhog/mailhog
+    volumes:
+      - mailhog-maildir:/home/mailhog/maildir
+    environment:
+      - MH_STORAGE=maildir
+      - MH_MAILDIR_PATH=/home/mailhog/maildir
     ports:
       - 8025:8025
-    profiles:
-      - test
 volumes:
   db:
+  mailhog-maildir:

@@ -8,14 +8,14 @@
     curl https://raw.githubusercontent.com/orsee/orsee/master/install/install.sql -o db/docker-entrypoint-initdb.d/install.sql
     docker-compose up -d
 
-Wait a few seconds then navigate to http://localhost:8080/orsee/public/
+Wait a few seconds then navigate to http://localhost:8088/orsee/public/
 
 ## Configuration
 You can configure your ORSEE either using environment variables via `.env`, or by inserting config files into the image build process. `.env-exmaple` is given as a guide.
 
 Supported variables and their defaults:
 
-    SERVER_URL=localhost:8080
+    SERVER_URL=localhost:8088
     SERVER_PROTOCOL=http://
     MYSQL_USER=orsee_user
     MYSQL_DATABASE=orsee_db
